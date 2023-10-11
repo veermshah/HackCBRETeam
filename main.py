@@ -1,4 +1,9 @@
+# Import prerequisite libraries
 import streamlit as st
+import os
+import openai
+import csv
+import gpt
 
 # Sample list of roles
 roles = ["Technician", "Building Manager", "Account Director", "Chief Engineer", "Portfolio Manager", "Asset Manager", "Leasing Manager", "Facility Coordinator", "Maintenance Supervisor"]
@@ -21,3 +26,5 @@ if st.button("Login"):
         st.write(f"You selected role: {selected_role}")
     else:
         st.error("Login failed. Please check your username and password.")
+        
+gpt.promptGPT("How long do elephants live?")
