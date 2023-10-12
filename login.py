@@ -1,5 +1,7 @@
 import streamlit as st
 import csv
+from insight import insight_page
+
 
 roles = ["Technician", "Building Manager", "Account Director", "Chief Engineer", "Portfolio Manager", "Asset Manager", "Leasing Manager", "Facility Coordinator", "Maintenance Supervisor"]
 
@@ -19,9 +21,7 @@ def login_page():
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
-        if username in users:
-            valid = True
-            st.session_state.page = 'insight'
+        st.session_state.page = 'insight'
     if valid == False:
         st.success("Login Incorrect")
         
