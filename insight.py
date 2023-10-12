@@ -1,9 +1,15 @@
 import streamlit as st
 from gpt import promptGPT  # Import the GPT function from the gpt module
 from gpt import getAccount
+import login
 
 def insight_page():
     st.title("Insight Page")
+    
+    # Ranking *****************************************************************************
+    
+    st.title(login.getRole())
+    # END RANKING *******************************************************************
 
     # Call your GPT function here and store the generated insights in a variable
     for i in range(10):

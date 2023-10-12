@@ -44,4 +44,8 @@ def login_page():
             #st.session_state.page = 'insight'
     #if valid == False:
         #st.markdown("Login Incorrect")
+    
+def getRole():
+    return selected_role
+
         
