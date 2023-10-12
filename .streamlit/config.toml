@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#FFFFFF"  # Set the accent color to white
+backgroundColor = "#FFFFFF"  # Set the background color to white
+secondaryBackgroundColor = "#F0F2F6"  # Set the secondary background color
+textColor = "#262730"  # Set the text color to black
+font = "sans-serif"  # Use sans-serif font
