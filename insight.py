@@ -15,6 +15,12 @@ button_images = {
 image_size = 50  # Adjust the size as needed
 
 def insight_page():
+    # Get the user's role
+    role = login.getRole()
+
+    # Set the role as the title
+    st.title(role)
+
     st.title("Insights")
     
     # Ranking *****************************************************************************
@@ -55,9 +61,16 @@ def insight_page():
    
     # END RANKING *******************************************************************
 
+    # Limit the number of displayed insights to 10
+    max_insights = min(10, len(critIndexes))
+
     # Call your GPT function here and store the generated insights in a variable
-    for i in range(len(critIndexes)):
+    for i in range(max_insights):
         insights = myGPT.promptGPT(critIndexes[i])
+        
+        # Add the title "Insight {i+1}"
+        st.header(f"Insight {i+1}")
+
         st.markdown("Company: " + myGPT.getAccount(i))  # Use header for a standard text format
         st.markdown(myGPT.getInsight2(critIndexes[i]))
         st.write(f'<div style="white-space: pre-line;">{insights}</div>', unsafe_allow_html=True)
