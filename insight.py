@@ -4,24 +4,28 @@ from gpt import GPT  # Import the GPT function from the gpt module
 def insight_page():
     st.title("Insight Page")
 
-    for i in range(1, 11):
+    # Call your GPT function here and store the generated insights in a variable
+    insights = GPT()
+
+    for i, insight in enumerate(insights, start=1):
         st.header(f"Insight {i}")  # Use header for a standard text format
 
-        # Call your GPT function here and store the generated insight in a variable
-        insight = GPT()  # Assuming GPT() returns a single insight
+        if "choices" in insight and len(insight["choices"]) > 0:
+            content = insight["choices"][0].get("message", {}).get("content", "")
+            # Display the AI-generated content in multiple lines with the same font
+            st.text(content)
+        else:
+            st.text("No insights available for this item.")
 
-        # Display the AI-generated insight in a standard text format
-        st.text(insight)
+        # Create a row to contain the buttons for this insight
+        col1, col2, col3, col4, col5 = st.columns(5)
 
-        # Create a column to contain the buttons for this insight
-        col = st.columns(5)
-
-        # Add unique keys to the buttons
-        like_button = col[0].button("Like", key=f"like_button_{i}")
-        dislike_button = col[1].button("Dislike", key=f"dislike_button_{i}")
-        share_button = col[2].button("Share", key=f"share_button_{i}")
-        bookmark_button = col[3].button("Bookmark", key=f"bookmark_button_{i}")
-        comment_button = col[4].button("Comment", key=f"comment_button_{i}")
+        # Add buttons to the columns
+        like_button = col1.button("Like", key=f"like_button_{i}")
+        dislike_button = col2.button("Dislike", key=f"dislike_button_{i}")
+        share_button = col3.button("Share", key=f"share_button_{i}")
+        bookmark_button = col4.button("Bookmark", key=f"bookmark_button_{i}")
+        comment_button = col5.button("Comment", key=f"comment_button_{i}")
 
         # You can handle the button actions here as needed
         if like_button:
