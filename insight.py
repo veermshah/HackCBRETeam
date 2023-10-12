@@ -2,6 +2,18 @@ import streamlit as st
 import login
 import myGPT
 
+# Define the button images with their paths
+button_images = {
+    "Like": "like.png",
+    "Dislike": "dislike.png",
+    "Share": "share.png",
+    "Bookmark": "save.tiff",
+    "Comment": "comment.png",
+}
+
+# Set the common image size
+image_size = 50  # Adjust the size as needed
+
 def insight_page():
     st.title("Insights")
     
@@ -54,12 +66,12 @@ def insight_page():
         # Create a row to contain the buttons for this insight
         col1, col2, col3, col4, col5 = st.columns(5)
 
-        # Add images without captions
-        col1.image(button_images["Like"], use_column_width=False, width=image_size)
-        col2.image(button_images["Dislike"], use_column_width=False, width=image_size)
-        col3.image(button_images["Share"], use_column_width=False, width=image_size)
-        col4.image(button_images["Bookmark"], use_column_width=False, width=image_size)
-        col5.image(button_images["Comment"], use_column_width=False, width=image_size)
+        # Add images above buttons
+        col1.image(button_images["Like"], width=image_size, use_column_width=False)
+        col2.image(button_images["Dislike"], width=image_size, use_column_width=False)
+        col3.image(button_images["Share"], width=image_size, use_column_width=False)
+        col4.image(button_images["Bookmark"], width=image_size, use_column_width=False)
+        col5.image(button_images["Comment"], width=image_size, use_column_width=False)
 
         # Add buttons with text under each image
         if col1.button("Like", key=f"like_button_{i}"):
@@ -88,4 +100,6 @@ def insight_page():
         st.session_state.page = "login"
     st.markdown('</div>', unsafe_allow_html=True)
 
-
+# Run the Streamlit app
+if __name__ == "__main__":
+    insight_page()

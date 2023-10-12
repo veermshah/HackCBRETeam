@@ -27,8 +27,6 @@ with open('recommendation_engine_users.csv', newline='') as csvfile:
         dashboard.append(row[6])
         userActivity.append(row[7])
 
-selected_role = "Technician"
-
 def login_page():
     st.title("Login Page")
     # Create a dropdown for selecting a role
@@ -38,12 +36,11 @@ def login_page():
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
+        st.session_state.selected_role = selected_role  # Store the selected role in session state
         st.session_state.page = 'insight'
-        #if username in emails:
-            #valid = True
-            #st.session_state.page = 'insight'
-    #if valid == False:
-        #st.markdown("Login Incorrect")
-    
+
 def getRole():
-    return selected_role
+    if 'selected_role' in st.session_state:
+        return st.session_state.selected_role
+    else:
+        return None

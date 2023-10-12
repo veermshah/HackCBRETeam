@@ -4,7 +4,7 @@ from insight import insight_page
 import os
 import openai
 import csv
-import gpt
+import myGPT
 
 # Define the roles list
 roles = ["Technician", "Building Manager", "Account Director", "Chief Engineer", "Portfolio Manager", "Asset Manager", "Leasing Manager", "Facility Coordinator", "Maintenance Supervisor"]
