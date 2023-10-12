@@ -1,23 +1,27 @@
 import streamlit as st
-import gpt
+from gpt import GPT  # Import the GPT function from the gpt module
 
 def insight_page():
     st.title("Insight Page")
 
     for i in range(1, 11):
-        st.markdown(f"### Insight {i}")
-        st.text(gpt.GPT())
+        st.header(f"Insight {i}")  # Use header for a standard text format
 
-        # Create five columns for buttons
-        col1, col2, col3, col4, col5 = st.columns(5)
+        # Call your GPT function here and store the generated insight in a variable
+        insight = GPT()  # Assuming GPT() returns a single insight
+
+        # Display the AI-generated insight in a standard text format
+        st.text(insight)
+
+        # Create a column to contain the buttons for this insight
+        col = st.columns(5)
 
         # Add unique keys to the buttons
-        like_button = col1.button(f"Like {i}", key=f"like_button_{i}")
-        dislike_button = col2.button(f"Dislike {i}", key=f"dislike_button_{i}")
-        share_button = col3.button(f"Share {i}", key=f"share_button_{i}")
-        bookmark_button = col4.button(f"Bookmark {i}", key=f"bookmark_button_{i}")
-        comment_button = col5.button(f"Comment {i}", key=f"comment_button_{i}")
-
+        like_button = col[0].button("Like", key=f"like_button_{i}")
+        dislike_button = col[1].button("Dislike", key=f"dislike_button_{i}")
+        share_button = col[2].button("Share", key=f"share_button_{i}")
+        bookmark_button = col[3].button("Bookmark", key=f"bookmark_button_{i}")
+        comment_button = col[4].button("Comment", key=f"comment_button_{i}")
 
         # You can handle the button actions here as needed
         if like_button:

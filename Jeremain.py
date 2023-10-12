@@ -6,6 +6,8 @@ import openai
 import csv
 import gpt
 
+# Define the roles list
+roles = ["Technician", "Building Manager", "Account Director", "Chief Engineer", "Portfolio Manager", "Asset Manager", "Leasing Manager", "Facility Coordinator", "Maintenance Supervisor"]
 
 # Create a Streamlit app title
 st.title("Multi-Page Streamlit App")
@@ -16,6 +18,6 @@ if 'page' not in st.session_state:
 
 # Check the page state and render the appropriate page
 if st.session_state.page == 'login':
-    login_page()
+    login_page(roles)  # Pass the roles list to the login_page function
 else:
     insight_page()
