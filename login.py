@@ -47,5 +47,3 @@ def login_page():
     
 def getRole():
     return selected_role
-
-        

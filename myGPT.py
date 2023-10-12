@@ -78,3 +78,12 @@ def promptGPT(index):
 
 def getAccount(index):
     return account[index]
+
+def getPriorities():
+    return insight1
+
+def getCriticality():
+    return criticality
+
+def getInsight2(index):
+    return insight2[index]

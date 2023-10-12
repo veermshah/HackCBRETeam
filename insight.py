@@ -1,21 +1,55 @@
 import streamlit as st
-from gpt import promptGPT  # Import the GPT function from the gpt module
-from gpt import getAccount
 import login
+import myGPT
 
 def insight_page():
-    st.title("Insight Page")
+    st.title("Insights")
     
     # Ranking *****************************************************************************
     
-    st.title(login.getRole())
+    # By Jobs
+    if login.getRole() == "Technician":
+        priority = ["Energy Usage", "Work Orders", "Accessibility", "Saftey Incidents"]
+        print(priority)
+    elif login.getRole() == "Building Manager":
+        priority = ["Leases", "Energy Usage", "Compliance", "Budgets", "Tenant Satisfaction", "Occupancy"]
+    elif login.getRole() == "Account Director":
+        priority = ["Budgets", "Compliance", "Occupancy", "Leases", "Tenant Satisfaction"]
+    elif login.getRole() == "Chief Engineer":
+        priority = ["Work Orders", "Saftey Incidents", "Energy Usage", "Accessibility"]
+    elif login.getRole() == "Portfolio Manager":
+        priority = ["Budgets"]
+    elif login.getRole() == "Asset Manager":
+        priority = ["Budgets"]
+    elif login.getRole() == "Leasing Manager":
+        priority = ["Leases", "Occupancy"]
+    elif login.getRole() == "Facility Coordinator":
+        priority = ["Tenant Satisfaction", "Compliance"]
+    elif login.getRole() == "Maintenance Supervisor":
+        priority = ["Compliance", "Work Orders"]
+        
+    priorities1 = myGPT.getPriorities()
+    print(priorities1)
+    criticalities = myGPT.getCriticality()
+    indexes = []
+    critIndexes = []
+    for i in range(len(priorities1)):
+        if priorities1[i] in priority:
+            indexes.append(i)
+            
+    for i in range(len(indexes)):
+        if criticalities[indexes[i]] == "Critical":
+            critIndexes.append(indexes[i])
+   
     # END RANKING *******************************************************************
 
     # Call your GPT function here and store the generated insights in a variable
-    for i in range(10):
-        insights = getAccount(i) + ": " + promptGPT(i)
-        st.header(f"Insight {i+1}")  # Use header for a standard text format
-        st.write(f'<div style="white-space: pre-line;">{insights}</div>', unsafe_allow_html=True)   
+    for i in range(len(critIndexes)):
+        insights = myGPT.promptGPT(critIndexes[i])
+        st.markdown("Company: " + myGPT.getAccount(i))  # Use header for a standard text format
+        st.markdown(myGPT.getInsight2(critIndexes[i]))
+        st.write(f'<div style="white-space: pre-line;">{insights}</div>', unsafe_allow_html=True)
+        st.write(" ")
     
         # Create a row to contain the buttons for this insight
         col1, col2, col3, col4, col5 = st.columns(5)
@@ -53,3 +87,5 @@ def insight_page():
     if st.button("Log Out", key="log_out_button", help="Log out and return to the login page"):
         st.session_state.page = "login"
     st.markdown('</div>', unsafe_allow_html=True)
+
+
