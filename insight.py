@@ -1,11 +1,12 @@
 import streamlit as st
+import gpt
 
 def insight_page():
     st.title("Insight Page")
 
     for i in range(1, 11):
         st.markdown(f"### Insight {i}")
-        st.text(f"This is your {i} insight.")
+        st.text(gpt.GPT())
 
         # Create five columns for buttons
         col1, col2, col3, col4, col5 = st.columns(5)

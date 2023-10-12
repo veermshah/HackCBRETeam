@@ -5,7 +5,8 @@ def promptGPT(prompt):
     import os
     
     # Setting the API key
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+    #openai.api_key = os.getenv("OPENAI_API_KEY")
+    openai.api_key = "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"
     # Create a chatbot using ChatCompletion.create() function
     completion = openai.ChatCompletion.create(
         # Use GPT 3.5 as the LLM
