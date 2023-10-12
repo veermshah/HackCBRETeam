@@ -1,30 +1,57 @@
 import streamlit as st
-
-# Define the button images with their paths
-button_images = {
-    "Like": "like.png",
-    "Dislike": "dislike.png",
-    "Share": "share.png",
-    "Bookmark": "save.tiff",
-    "Comment": "comment.png",
-}
-
-# Set the common image size
-image_size = 50  # Adjust the size as needed
-
-# Mock AI-generated insights (replace with your actual data)
-insights = ["AI Insight 1", "AI Insight 2", "AI Insight 3", "AI Insight 4", "AI Insight 5"]
+import login
+import myGPT
 
 def insight_page():
-    st.title("Insight Page")
+    st.title("Insights")
+    
+    # Ranking *****************************************************************************
+    
+    # By Jobs
+    if login.getRole() == "Technician":
+        priority = ["Energy Usage", "Work Orders", "Accessibility", "Saftey Incidents"]
+        print(priority)
+    elif login.getRole() == "Building Manager":
+        priority = ["Leases", "Energy Usage", "Compliance", "Budgets", "Tenant Satisfaction", "Occupancy"]
+    elif login.getRole() == "Account Director":
+        priority = ["Budgets", "Compliance", "Occupancy", "Leases", "Tenant Satisfaction"]
+    elif login.getRole() == "Chief Engineer":
+        priority = ["Work Orders", "Saftey Incidents", "Energy Usage", "Accessibility"]
+    elif login.getRole() == "Portfolio Manager":
+        priority = ["Budgets"]
+    elif login.getRole() == "Asset Manager":
+        priority = ["Budgets"]
+    elif login.getRole() == "Leasing Manager":
+        priority = ["Leases", "Occupancy"]
+    elif login.getRole() == "Facility Coordinator":
+        priority = ["Tenant Satisfaction", "Compliance"]
+    elif login.getRole() == "Maintenance Supervisor":
+        priority = ["Compliance", "Work Orders"]
+        
+    priorities1 = myGPT.getPriorities()
+    print(priorities1)
+    criticalities = myGPT.getCriticality()
+    indexes = []
+    critIndexes = []
+    for i in range(len(priorities1)):
+        if priorities1[i] in priority:
+            indexes.append(i)
+            
+    for i in range(len(indexes)):
+        if criticalities[indexes[i]] == "Critical":
+            critIndexes.append(indexes[i])
+   
+    # END RANKING *******************************************************************
 
-    for i in range(5):  # Adjust the number of insights as needed
-        st.header(f"Insight {i+1}")
-
-        # AI-generated insight
-        st.write(insights[i])
-
-        # Create a row to contain the image buttons
+    # Call your GPT function here and store the generated insights in a variable
+    for i in range(len(critIndexes)):
+        insights = myGPT.promptGPT(critIndexes[i])
+        st.markdown("Company: " + myGPT.getAccount(i))  # Use header for a standard text format
+        st.markdown(myGPT.getInsight2(critIndexes[i]))
+        st.write(f'<div style="white-space: pre-line;">{insights}</div>', unsafe_allow_html=True)
+        st.write(" ")
+    
+        # Create a row to contain the buttons for this insight
         col1, col2, col3, col4, col5 = st.columns(5)
 
         # Add images without captions
@@ -61,6 +88,4 @@ def insight_page():
         st.session_state.page = "login"
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Run the Streamlit app
-if __name__ == "__main__":
-    insight_page()
+
