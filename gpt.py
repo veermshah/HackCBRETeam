@@ -59,7 +59,7 @@ def promptGPT(index):
     openai.api_key = os.getenv("OPENAI_API_KEY", "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")
     string = propertyAddress[index] + ", " + insight1[index] + ", " + insight2[index] + ", " + driver[index]
     prompt = "Make an insight sentence for a real estate app: " + string
-    print("Prompt: " + prompt)
+    #print("Prompt: " + prompt)
     
     messages = [
         {"role": "assistant", "content": prompt}
@@ -75,5 +75,3 @@ def promptGPT(index):
     insights = response['choices'][0]['message']['content']
 
     return insights
-
-print(promptGPT(2))
