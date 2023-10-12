@@ -1,22 +1,16 @@
 import streamlit as st
 from gpt import promptGPT  # Import the GPT function from the gpt module
+from gpt import getAccount
 
 def insight_page():
     st.title("Insight Page")
 
     # Call your GPT function here and store the generated insights in a variable
-    insights = promptGPT(1)
-
-    for i, insight in enumerate(insights, start=1):
-        st.header(f"Insight {i}")  # Use header for a standard text format
-
-        if "choices" in insight and len(insight["choices"]) > 0:
-            content = insight["choices"][0].get("message", {}).get("content", "")
-            # Display the AI-generated content in multiple lines with the same font
-            st.text(content)
-        else:
-            st.text("No insights available for this item.")
-
+    for i in range(10):
+        insights = getAccount(i) + ": " + promptGPT(i)
+        st.header(f"Insight {i+1}")  # Use header for a standard text format
+        st.write(f'<div style="white-space: pre-line;">{insights}</div>', unsafe_allow_html=True)   
+    
         # Create a row to contain the buttons for this insight
         col1, col2, col3, col4, col5 = st.columns(5)
 

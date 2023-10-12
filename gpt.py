@@ -75,3 +75,6 @@ def promptGPT(index):
     insights = response['choices'][0]['message']['content']
 
     return insights
+
+def getAccount(index):
+    return account[index]
