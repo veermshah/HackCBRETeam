@@ -27,27 +27,8 @@ with open('recommendation_engine_users.csv', newline='') as csvfile:
         dashboard.append(row[6])
         userActivity.append(row[7])
 
-#INSIGHTS ***********************************************
-propertyAddress = []
-insight1 = []
-insight2 = []
-driver = []
-account = []
-criticality = []
+selected_role = "Technician"
 
-
-
-with open('property_insights_extended', newline='') as csvfile:
-    reader = csv.reader(csvfile)
-    next(reader)  # Skip the header row if it exists
-    for row in reader:
-        propertyAddress.append(row[0])
-        insight1.append(row[1])
-        insight2.append(row[2])  
-        driver.append(row[3])  
-        account.append(row[4])
-        criticality.append(row[5])
-        
 def login_page():
     st.title("Login Page")
     # Create a dropdown for selecting a role
@@ -57,8 +38,10 @@ def login_page():
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
-        if username in emails:
-            valid = True
-            st.session_state.page = 'insight'
-    if valid == False:
-        st.markdown("Login Incorrect")
+        st.session_state.page = 'insight'
+        #if username in emails:
+            #valid = True
+            #st.session_state.page = 'insight'
+    #if valid == False:
+        #st.markdown("Login Incorrect")
+        

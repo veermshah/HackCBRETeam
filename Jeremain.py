@@ -18,6 +18,6 @@ if 'page' not in st.session_state:
 
 # Check the page state and render the appropriate page
 if st.session_state.page == 'login':
-    login_page(roles)  # Pass the roles list to the login_page function
+    login_page()  # Pass the roles list to the login_page function
 else:
     insight_page()

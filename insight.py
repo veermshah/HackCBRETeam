@@ -1,11 +1,11 @@
 import streamlit as st
-from gpt import GPT  # Import the GPT function from the gpt module
+from gpt import promptGPT  # Import the GPT function from the gpt module
 
 def insight_page():
     st.title("Insight Page")
 
     # Call your GPT function here and store the generated insights in a variable
-    insights = GPT()
+    insights = promptGPT(1)
 
     for i, insight in enumerate(insights, start=1):
         st.header(f"Insight {i}")  # Use header for a standard text format
