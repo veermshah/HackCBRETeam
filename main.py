@@ -1,5 +1,5 @@
 import streamlit as st
-
+from storage import storage
 # Sample list of roles
 roles = ["Technician", "Building Manager", "Account Director", "Chief Engineer", "Portfolio Manager", "Asset Manager", "Leasing Manager", "Facility Coordinator", "Maintenance Supervisor"]
 
@@ -21,3 +21,7 @@ if st.button("Login"):
         st.write(f"You selected role: {selected_role}")
     else:
         st.error("Login failed. Please check your username and password.")
+
+
+#st = storage()
+#storage.fetch1(12,3)
