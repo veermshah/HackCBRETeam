@@ -1,5 +1,4 @@
 # HackCBRETeam
 Group Hackathon Group
-Authors: Jeremiah, Veer, Noel, Mekha
+Submitted to HackCBRE 2023
 
-Implementation:
